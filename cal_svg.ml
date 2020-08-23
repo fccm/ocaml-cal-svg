@@ -207,7 +207,7 @@ let () =
     let x = 10 + i * 40 in
     add_rect svg ~x ~y:30 ~width:40 ~height:10 ~fill:"#888" ~stroke:"#000" ~stroke_width:0.3;
     let x = 30 + i * 40 in
-    let text = String.capitalize_ascii days.(i) in
+    let text = String.capitalize_ascii days.(days_order.(i)) in
     add_text svg ~x ~y:37 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:5.0 ~font_weight:"normal" ~fill:"#FFF" ~text;
   done;
   add_newline svg;
