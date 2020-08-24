@@ -1,6 +1,7 @@
 #load "unix.cma"
 
 let lang = "id"  (* language: Indonesian *)
+let lang = "no"  (* language: Norwegian *)
 let lang = "en"  (* language: English *)
 let lang = "fr"  (* language: French *)
 
@@ -56,6 +57,7 @@ let cal_lang = [
   "da", "kalender";
   "id", "kalendar";
   "pt", "calendário";
+  "no", "kalender";
 ]
 
 let months_lang = [
@@ -104,6 +106,11 @@ let months_lang = [
     "maio"; "junho"; "julho"; "agosto";
     "setembro"; "outubro"; "novembro"; "dezembro";
   |];
+  "no", [|
+    "januar"; "februar"; "mars"; "april";
+    "mai"; "juni"; "juli"; "august";
+    "september"; "oktober"; "november"; "desember";
+  |];
 ]
 
 
@@ -126,6 +133,8 @@ let days_lang = [
     "Kamis"; "Jumat"; "Sabtu"; "Minggu" |];
   "pt", [| "segunda-feira"; "terça-feira"; "quarta-feira";
     "quinta-feira"; "sexta-feira"; "sábado"; "domingo" |];
+  "no", [| "mandag"; "tirsdag"; "onsdag"; "torsdag";
+    "fredag"; "lørdag"; "søndag" |];
 ]
 
  
