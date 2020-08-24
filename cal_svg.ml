@@ -1,3 +1,14 @@
+(* A Simple Calendar Generator in SVG
+ Copyright (C) 2020 Florent Monnier
+ 
+ This software is provided "AS-IS", without any express or implied warranty.
+ In no event will the authors be held liable for any damages arising from
+ the use of this software.
+ 
+ Permission is granted to anyone to use this software and associated elements
+ for any purpose, including commercial applications, and to alter it and
+ redistribute it freely.
+*)
 #load "unix.cma"
 
 let lang = "id"  (* language: Indonesian *)
