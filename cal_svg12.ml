@@ -281,11 +281,9 @@ let () =
         let x = 10 + i * 40 in
         let y = 40 + w * cell_height in
         let d = m.(w).(i) in
-        if d = 0 then
-          (*
-          add_rect svg ~x ~y ~width:40 ~height:cell_height ~fill:"#DDD" ~stroke:"#000" ~stroke_width:0.3
-          *) ()
-        else begin
+        if d = 0 then begin
+          if w = 0 then add_rect svg ~x ~y ~width:40 ~height:cell_height ~fill:"#EEE" ~stroke:"#000" ~stroke_width:0.3
+        end else begin
           add_rect svg ~x ~y ~width:40 ~height:cell_height ~fill:"#FFF" ~stroke:"#000" ~stroke_width:0.3;
           let text = Printf.sprintf "%d" d in
           add_text svg ~x:(x+2) ~y:(y+13) ~text_anchor:"right" ~font_family:"sans-serif" ~font_size:13.0 ~font_weight:"normal" ~fill:"#222" ~text;
