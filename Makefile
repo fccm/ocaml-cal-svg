@@ -33,3 +33,6 @@ cal-2020.pdf: pdf
 
 %.pdf: %.svg
 	inkscape $< --export-pdf=$@
+
+%.png: %.svg
+	inkscape $< --export-background=white --export-png=$@
