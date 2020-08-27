@@ -251,14 +251,14 @@ let () =
 
     (* Month label *)
     let text = String.capitalize_ascii months.(pred mon) in
-    add_text svg ~x:10 ~y:22 ~text_anchor:"left" ~font_family:"sans-serif" ~font_size:13.0 ~font_weight:"bold" ~fill:"#444" ~text;
+    add_text svg ~x:6 ~y:22 ~text_anchor:"left" ~font_family:"sans-serif" ~font_size:13.0 ~font_weight:"bold" ~fill:"#444" ~text;
     add_newline svg;
 
     (* Labels: days names *)
     for i = 0 to 6 do
-      let x = 10 + i * 30 in
+      let x = 4 + i * 30 in
       add_rect svg ~x ~y:30 ~width:30 ~height:14 ~fill:"#DDD" ~stroke:"#000" ~stroke_width:0.3;
-      let x = 26 + i * 30 in
+      let x = 20 + i * 30 in
       let text = String.capitalize_ascii days.(days_order.(i)) in
       let text = String.sub text 0 3 in
       add_text svg ~x ~y:40 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:8.0 ~font_weight:"normal" ~fill:"#000" ~text;
@@ -278,7 +278,7 @@ let () =
 
     for w = 0 to num_rows do  (* for each row of the month *)
       for i = 0 to 6 do  (* for each day *)
-        let x = 10 + i * 30 in
+        let x = 4 + i * 30 in
         let y = 44 + w * cell_height in
         let d = m.(w).(i) in
         if d = 0 then begin
