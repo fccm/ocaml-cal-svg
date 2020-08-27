@@ -11,7 +11,13 @@
 *)
 #load "unix.cma"
 
+let lang = "de"  (* language: German *)
+let lang = "es"  (* language: Spanish *)
+let lang = "it"  (* language: Italian *)
+let lang = "nl"  (* language: Dutch *)
+let lang = "da"  (* language: Danish *)
 let lang = "id"  (* language: Indonesian *)
+let lang = "pt"  (* language: Portuguese *)
 let lang = "no"  (* language: Norwegian *)
 let lang = "en"  (* language: English *)
 let lang = "fr"  (* language: French *)
