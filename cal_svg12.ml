@@ -286,7 +286,7 @@ let () =
         end else begin
           add_rect svg ~x ~y ~width:40 ~height:cell_height ~fill:"#FFF" ~stroke:"#000" ~stroke_width:0.3;
           let text = Printf.sprintf "%d" d in
-          add_text svg ~x:(x+2) ~y:(y+13) ~text_anchor:"right" ~font_family:"sans-serif" ~font_size:13.0 ~font_weight:"normal" ~fill:"#222" ~text;
+          add_text svg ~x:(x+20) ~y:(y+18) ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.0 ~font_weight:"normal" ~fill:"#222" ~text;
         end;
       done;
       add_newline svg;
