@@ -236,18 +236,18 @@ let () =
 
   (* Year and title *)
   let text = Printf.sprintf "%s %d" (String.capitalize_ascii cal) year in
-  add_text svg ~x:16 ~y:8 ~text_anchor:"left" ~font_family:"sans-serif" ~font_size:6.0 ~font_weight:"bold" ~fill:"#444" ~text;
+  add_text svg ~x:16 ~y:16 ~text_anchor:"left" ~font_family:"sans-serif" ~font_size:6.0 ~font_weight:"bold" ~fill:"#444" ~text;
   add_newline svg;
 
   for mon = 1 to 12 do  (* for each month *)
 
     let tx, ty =
       let m = pred mon in
-      float (18 + (m mod 3) * 92),
-      float ( 8 + (m / 3) * 50)
+      float (18 + (m mod 4) * 68),
+      float (22 + (m / 4) * 60)
     in
 
-    begin_group svg ~translate:(tx, ty) ~scale:(0.24, 0.24);
+    begin_group svg ~translate:(tx, ty) ~scale:(0.27, 0.27);
 
     (* Month label *)
     let text = String.capitalize_ascii months.(pred mon) in
@@ -256,9 +256,9 @@ let () =
 
     (* Labels: days names *)
     for i = 0 to 6 do
-      let x = 10 + i * 40 in
-      add_rect svg ~x ~y:30 ~width:40 ~height:10 ~fill:"#DDD" ~stroke:"#000" ~stroke_width:0.3;
-      let x = 30 + i * 40 in
+      let x = 10 + i * 30 in
+      add_rect svg ~x ~y:30 ~width:30 ~height:10 ~fill:"#DDD" ~stroke:"#000" ~stroke_width:0.3;
+      let x = 26 + i * 30 in
       let text = String.capitalize_ascii days.(days_order.(i)) in
       let text = String.sub text 0 3 in
       add_text svg ~x ~y:37 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:7.0 ~font_weight:"normal" ~fill:"#000" ~text;
@@ -278,15 +278,15 @@ let () =
 
     for w = 0 to num_rows do  (* for each row of the month *)
       for i = 0 to 6 do  (* for each day *)
-        let x = 10 + i * 40 in
+        let x = 10 + i * 30 in
         let y = 40 + w * cell_height in
         let d = m.(w).(i) in
         if d = 0 then begin
-          if w = 0 then add_rect svg ~x ~y ~width:40 ~height:cell_height ~fill:"#EEE" ~stroke:"#000" ~stroke_width:0.3
+          if w = 0 then add_rect svg ~x ~y ~width:30 ~height:cell_height ~fill:"#EEE" ~stroke:"#000" ~stroke_width:0.3
         end else begin
-          add_rect svg ~x ~y ~width:40 ~height:cell_height ~fill:"#FFF" ~stroke:"#000" ~stroke_width:0.3;
+          add_rect svg ~x ~y ~width:30 ~height:cell_height ~fill:"#FFF" ~stroke:"#000" ~stroke_width:0.3;
           let text = Printf.sprintf "%d" d in
-          add_text svg ~x:(x+20) ~y:(y+18) ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.0 ~font_weight:"normal" ~fill:"#222" ~text;
+          add_text svg ~x:(x+16) ~y:(y+18) ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.0 ~font_weight:"normal" ~fill:"#222" ~text;
         end;
       done;
       add_newline svg;
