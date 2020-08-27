@@ -243,8 +243,8 @@ let () =
 
     let tx, ty =
       let m = pred mon in
-      float (18 + (m / 4) * 92),
-      float ( 8 + (m mod 4) * 50)
+      float (18 + (m mod 3) * 92),
+      float ( 8 + (m / 3) * 50)
     in
 
     begin_group svg ~translate:(tx, ty) ~scale:(0.24, 0.24);
