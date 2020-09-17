@@ -258,7 +258,7 @@ let () =
     for i = 0 to 6 do
       let x = 4 + i * 30 in
       add_rect svg ~x ~y:30 ~width:30 ~height:14 ~fill:"#DDD" ~stroke:"#000" ~stroke_width:0.3;
-      let x = 20 + i * 30 in
+      let x = 19 + i * 30 in
       let text = String.capitalize_ascii days.(days_order.(i)) in
       let text = String.sub text 0 3 in
       add_text svg ~x ~y:40 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:8.0 ~font_weight:"normal" ~fill:"#000" ~text;
@@ -286,7 +286,7 @@ let () =
         end else begin
           add_rect svg ~x ~y ~width:30 ~height:cell_height ~fill:"#FFF" ~stroke:"#000" ~stroke_width:0.3;
           let text = Printf.sprintf "%d" d in
-          add_text svg ~x:(x+16) ~y:(y+18) ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.0 ~font_weight:"normal" ~fill:"#222" ~text;
+          add_text svg ~x:(x+15) ~y:(y+19) ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.0 ~font_weight:"normal" ~fill:"#222" ~text;
         end;
       done;
       add_newline svg;
