@@ -19,6 +19,7 @@ let lang = "da"  (* language: Danish *)
 let lang = "id"  (* language: Indonesian *)
 let lang = "pt"  (* language: Portuguese *)
 let lang = "no"  (* language: Norwegian *)
+let lang = "sl"  (* language: Slovenian *)
 let lang = "en"  (* language: English *)
 let lang = "fr"  (* language: French *)
 
@@ -88,6 +89,7 @@ let cal_lang = [
   "id", "kalendar";
   "pt", "calendário";
   "no", "kalender";
+  "sl", "koledar";
 ]
 
 let months_lang = [
@@ -141,6 +143,11 @@ let months_lang = [
     "mai"; "juni"; "juli"; "august";
     "september"; "oktober"; "november"; "desember";
   |];
+  "sl", [|
+    "januar"; "februar"; "marec"; "april";
+    "maj"; "junij"; "julij"; "avgust";
+    "september"; "oktober"; "november"; "december";
+  |];
 ]
 
 
@@ -165,6 +172,8 @@ let days_lang = [
     "quinta-feira"; "sexta-feira"; "sábado"; "domingo" |];
   "no", [| "mandag"; "tirsdag"; "onsdag"; "torsdag";
     "fredag"; "lørdag"; "søndag" |];
+  "sl", [| "ponedeljek"; "torek"; "sreda";
+    "četrtek"; "petek"; "sobota"; "nedelja" |];
 ]
 
 let days_abbr_lang = [
@@ -188,6 +197,8 @@ let days_abbr_lang = [
     "sex"; "sáb"; "dom" |];
   "no", [| "man"; "tir"; "ons";
     "tor"; "fre"; "lør"; "søn" |];
+  "sl", [| "pon"; "tor"; "sre";
+    "čet"; "pet"; "sob"; "ned" |];
 ]
 
  
