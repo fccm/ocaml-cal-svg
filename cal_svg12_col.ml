@@ -22,6 +22,9 @@ let lang = "no"  (* language: Norwegian *)
 let lang = "en"  (* language: English *)
 let lang = "fr"  (* language: French *)
 
+let lang =
+  try Sys.argv.(2) with _ -> lang
+
 
 (* SVG *)
 
