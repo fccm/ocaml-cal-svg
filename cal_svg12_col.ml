@@ -167,8 +167,32 @@ let days_lang = [
     "fredag"; "lørdag"; "søndag" |];
 ]
 
+let days_abbr_lang = [
+  "en", [| "Mon"; "Tue"; "Wed";
+    "Thu"; "Fri"; "Sat"; "Sun" |];
+  "fr", [| "lun"; "mar"; "mer";
+    "jeu"; "ven"; "sam"; "dim" |];
+  "de", [| "Mo"; "Di"; "Mi";
+    "Do"; "Fr"; "Sa"; "So" |];
+  "es", [| "lun"; "mar"; "mié";
+    "jue"; "vie"; "sáb"; "dom" |];
+  "it", [| "lun"; "mar"; "mer";
+    "gio"; "ven"; "sab"; "dom" |];
+  "nl", [| "ma"; "di"; "wo";
+    "do"; "vr"; "za"; "zo" |];
+  "da", [| "man"; "tir"; "ons";
+    "tor"; "fre"; "lør"; "søn" |];
+  "id", [| "Sen"; "Sel"; "Rab";
+    "Kam"; "Jum"; "Sab"; "Min" |];
+  "pt", [| "seg"; "ter"; "qua"; "qui";
+    "sex"; "sáb"; "dom" |];
+  "no", [| "man"; "tir"; "ons";
+    "tor"; "fre"; "lør"; "søn" |];
+]
+
  
 let days = List.assoc lang days_lang
+let days_abbr = List.assoc lang days_abbr_lang
 let months = List.assoc lang months_lang
 let cal = List.assoc lang cal_lang
  
@@ -265,8 +289,7 @@ let () =
       let x = 4 + i * 30 in
       add_rect svg ~x ~y:30 ~width:30 ~height:14 ~fill:"#CCF" ~stroke:"#000" ~stroke_width:0.0 ~fill_opacity:0.3 ();
       let x = 19 + i * 30 in
-      let text = String.capitalize_ascii days.(days_order.(i)) in
-      let text = String.sub text 0 3 in
+      let text = days_abbr.(days_order.(i)) in
       add_text svg ~x ~y:40 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:8.0 ~font_weight:"normal" ~fill:"#000" ~text;
     done;
     add_newline svg;
