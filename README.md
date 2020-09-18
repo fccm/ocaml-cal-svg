@@ -1,4 +1,8 @@
-Generates a calendar, one month by page.
+Generates a calendar, one month by page with `cal_svg.ml`.
+
+Generates a black and white calendars with `cal_svg12.ml`.
+
+Generates calendars with color headers with `cal_svg12_col.ml`.
 
 Produce the page for January 2021, in English, in SVG with:
 ```
