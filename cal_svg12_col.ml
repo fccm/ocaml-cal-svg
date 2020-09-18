@@ -272,7 +272,9 @@ let () =
   in
 
   let svg = new_svg_document ~width:297 ~height:210 () in
-  add_rect svg ~x:0 ~y:0 ~width:297 ~height:210 ~fill:"#BBB" ~stroke:"#BBB" ~stroke_width:0.0 ();
+
+  (* Background *)
+  add_rect svg ~x:0 ~y:0 ~width:297 ~height:210 ~fill:"#CCC" ~stroke:"#CCC" ~stroke_width:0.0 ();
 
   (* Year and title *)
   let text = Printf.sprintf "%s %d" (String.capitalize_ascii cal) year in
