@@ -36,5 +36,8 @@ cal-$(YEAR).pdf: pdf
 %.pdf: %.svg
 	inkscape $< --export-pdf=$@
 
+#%.pdf: %.svg
+#	rsvg-convert -f pdf -o $@ $<
+
 %.png: %.svg
 	inkscape $< --export-background=white --export-png=$@
