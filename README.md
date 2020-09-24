@@ -1,14 +1,10 @@
 # Simple Calendar Generators in SVG
 
-Generates a calendar, one month by page with `cal_svg.ml`.
-
-Generates a black and white calendars with `cal_svg12.ml`.
-
-Generates calendars with color headers with `cal_svg12_col.ml`.
-
-Generates calendars with rainbow colors with `cal_svg12_colm.ml`.
-
-Generates black and white calendars with `cal_svg12_bnw.ml`.
+* Generates a calendar, one month by page with `cal_svg.ml`.
+* Generates a black and white calendars with `cal_svg12.ml`.
+* Generates calendars with color headers with `cal_svg12_col.ml`.
+* Generates calendars with rainbow colors with `cal_svg12_colm.ml`.
+* Generates black and white calendars with `cal_svg12_bnw.ml`.
 
 Produce the page for January 2021, in English, in SVG with:
 ```
