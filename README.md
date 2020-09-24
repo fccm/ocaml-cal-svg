@@ -14,7 +14,7 @@ Produce the page for January 2021, in English, in SVG with:
 ```
 ocaml cal_svg.ml 2021-01 en > cal-2021-01-en.svg
 ```
-with `cal_svg.ml` with should provide the year and the month in
+with `cal_svg.ml` you should provide the year and the month in
 argument, with all the other calendars just provide the year
 and the language code.
 
