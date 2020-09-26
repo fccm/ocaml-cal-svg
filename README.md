@@ -5,6 +5,7 @@
 * Generates calendars with color headers with `cal_svg12_col.ml`.
 * Generates calendars with rainbow colors with `cal_svg12_colm.ml`.
 * Generates black and white calendars with `cal_svg12_bnw.ml`.
+* Generates calendars with shadows behind the months blocks `cal_svg12_sha.ml`.
 
 Produce the page for January 2021, in English, in SVG with:
 ```
