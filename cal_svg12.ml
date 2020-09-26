@@ -200,40 +200,40 @@ let days_abbr_lang = [
     "čet"; "pet"; "sob"; "ned" |];
 ]
 
- 
+
 let days = List.assoc lang days_lang
 let days_abbr = List.assoc lang days_abbr_lang
 let months = List.assoc lang months_lang
 let cal = List.assoc lang cal_lang
- 
+
 let monday_first = 6, [| 0; 1; 2; 3; 4; 5; 6 |]
 let sunday_first = 0, [| 6; 0; 1; 2; 3; 4; 5 |]
- 
+
 let off, days_order = sunday_first
 let off, days_order = monday_first
- 
- 
+
+
 let t_same t1 t2 =
   ( t1.Unix.tm_year = t2.Unix.tm_year &&
     t1.Unix.tm_mon  = t2.Unix.tm_mon &&
     t1.Unix.tm_mday = t2.Unix.tm_mday )
- 
+
 
 let indices ofs =
   (ofs / 7, ofs mod 7)
- 
+
 
 (*
 let t = Unix.gmtime 0.0 in
-  make_month t 2020 0 ;; 
+  make_month t 2020 0 ;;
 - : int array array =
  [|
-  [| 0;  0;  1;  2;  3;  4 ; 5|];
+  [| 0;  0;  1;  2;  3;  4;  5|];
   [| 6;  7;  8;  9; 10; 11; 12|];
   [|13; 14; 15; 16; 17; 18; 19|];
   [|20; 21; 22; 23; 24; 25; 26|];
   [|27; 28; 29; 30; 31;  0;  0|];
-  [|0; 0; 0; 0; 0; 0; 0|]
+  [| 0;  0;  0;  0;  0;  0;  0|];
  |]
 *)
 let make_month t year month =
@@ -257,7 +257,7 @@ let make_month t year month =
     incr ofs;
   done;
   (m)
- 
+
 
 let current_year () =
   let t = Unix.localtime (Unix.time ()) in
