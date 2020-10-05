@@ -19,9 +19,9 @@ let lang = "da"  (* language: Danish *)
 let lang = "id"  (* language: Indonesian *)
 let lang = "pt"  (* language: Portuguese *)
 let lang = "no"  (* language: Norwegian *)
+let lang = "sl"  (* language: Slovenian *)
 let lang = "en"  (* language: English *)
 let lang = "fr"  (* language: French *)
-let lang = "sl"  (* language: Slovenian *)
 
 let lang =
   try Sys.argv.(2) with _ -> lang
