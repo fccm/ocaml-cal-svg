@@ -47,49 +47,88 @@ let finish_svg b =
   Buffer.add_string b "\n</svg>\n";
 ;;
 
-let add_css b ~selectors ~styles =
+let new_css () = ref []
+
+let fill           = "fill"
+let fill_opacity   = "fill-opacity"
+let stroke         = "stroke"
+let stroke_width   = "stroke-width"
+let stroke_opacity = "stroke-opacity"
+let font_size      = "font-size"
+let font_style     = "font-style"
+let font_weight    = "font-weight"
+let font_family    = "font-family"
+let text_anchor    = "text-anchor"
+let letter_spacing = "letter-spacing"
+let word_spacing   = "word-spacing"
+
+let css_add css ~selector ~style =
+  css := (selector, style) :: !css
+
+let add_css_to_svg css b =
   Printf.kprintf (Buffer.add_string b) {|
 <style type="text/css">
 <![CDATA[
 |};
-  List.iter2 (fun selector style ->
-    Printf.kprintf (Buffer.add_string b) {|
-.%s {
-  fill: %s;
-}
-|} selector style;
-  ) selectors styles;
+
+  List.iter (fun (selector, style) ->
+    Printf.kprintf (Buffer.add_string b) "\n%s {\n" selector;
+    List.iter (fun (attr, value) ->
+      Printf.kprintf (Buffer.add_string b) "  %s: %s;\n" attr value;
+    ) style;
+    Printf.kprintf (Buffer.add_string b) "}\n";
+  ) (List.rev !css);
+
   Printf.kprintf (Buffer.add_string b) {|
 ]]>
 </style>
 |};
 ;;
 
-let add_text b ~x ~y ~text ~text_anchor ~font_family ~font_size ~font_weight ~fill ?fill_opacity () =
-  let fill_opacity = match fill_opacity with None -> "" | Some v -> Printf.sprintf " fill-opacity=\"%g\"" v in
-  Printf.kprintf (Buffer.add_string b) {|
-<text x="%d" y="%d" text-anchor="%s" font-family="%s" font-size="%g" font-weight="%s" fill="%s"%s>%s</text>|}
-  x y text_anchor font_family font_size font_weight fill fill_opacity text;
-;;
 
-let add_line b ~x1 ~y1 ~x2 ~y2 ~style () =
-  Printf.kprintf (Buffer.add_string b) {|
-<line x1="%d" y1="%d" x2="%d" y2="%d" style="%s" />|}
-  x1 y1 x2 y2 style
-;;
-
-let add_rect b ~x ~y ~width ~height ?rx ?ry ?fill ?stroke ?stroke_width ?fill_opacity ?css () =
-  let fill_opacity = match fill_opacity with None -> "" | Some v -> Printf.sprintf " fill-opacity=\"%g\"" v in
+let add_text b ~x ~y ~text ?text_anchor ?font_family ?font_size ?font_weight ?fill ?fill_opacity ?css () =
   let fill         = match fill         with None -> "" | Some v -> Printf.sprintf " fill=\"%s\"" v in
+  let fill_opacity = match fill_opacity with None -> "" | Some v -> Printf.sprintf " fill-opacity=\"%g\"" v in
+  let text_anchor  = match text_anchor  with None -> "" | Some v -> Printf.sprintf " text-anchor=\"%s\"" v in
+  let font_family  = match font_family  with None -> "" | Some v -> Printf.sprintf " font-family=\"%s\"" v in
+  let font_size    = match font_size    with None -> "" | Some v -> Printf.sprintf " font-size=\"%g\"" v in
+  let font_weight  = match font_weight  with None -> "" | Some v -> Printf.sprintf " font-weight=\"%s\"" v in
+  let css          = match css          with None -> "" | Some v -> Printf.sprintf " class=\"%s\"" v in
+
+  Printf.kprintf (Buffer.add_string b) {|
+<text x="%d" y="%d"%s%s%s%s%s%s%s>%s</text>|}
+  x y css text_anchor font_family font_size font_weight fill fill_opacity text;
+;;
+
+
+let add_line b ~x1 ~y1 ~x2 ~y2 ?css ?style ?stroke ?stroke_width ?stroke_opacity () =
+
+  let css          = match css          with None -> "" | Some v -> Printf.sprintf " class=\"%s\"" v in
+  let style        = match style        with None -> "" | Some v -> Printf.sprintf " style=\"%s\"" v in
   let stroke       = match stroke       with None -> "" | Some v -> Printf.sprintf " stroke=\"%s\"" v in
   let stroke_width = match stroke_width with None -> "" | Some v -> Printf.sprintf " stroke-width=\"%g\"" v in
-  let css          = match css          with None -> "" | Some v -> Printf.sprintf " class=\"%s\"" v in
-  let rx           = match rx           with None -> "" | Some v -> Printf.sprintf " rx=\"%g\"" v in
-  let ry           = match ry           with None -> "" | Some v -> Printf.sprintf " ry=\"%g\"" v in
+  let stroke_opacity = match stroke_opacity with None -> "" | Some v -> Printf.sprintf " stroke-opacity=\"%g\"" v in
 
   Printf.kprintf (Buffer.add_string b) {|
-<rect x="%d" y="%d" width="%d" height="%d" %s%s%s%s%s%s%s />|}
-  x y width height rx ry css fill stroke stroke_width fill_opacity;
+<line x1="%d" y1="%d" x2="%d" y2="%d"%s%s%s%s%s />|}
+  x1 y1 x2 y2 css style
+  stroke stroke_width stroke_opacity;
+;;
+
+
+let add_rect b ~x ~y ~width ~height ?rx ?ry ?fill ?fill_opacity ?stroke ?stroke_width ?stroke_opacity ?css () =
+  let rx           = match rx           with None -> "" | Some v -> Printf.sprintf " rx=\"%g\"" v in
+  let ry           = match ry           with None -> "" | Some v -> Printf.sprintf " ry=\"%g\"" v in
+  let fill         = match fill         with None -> "" | Some v -> Printf.sprintf " fill=\"%s\"" v in
+  let fill_opacity = match fill_opacity with None -> "" | Some v -> Printf.sprintf " fill-opacity=\"%g\"" v in
+  let stroke       = match stroke       with None -> "" | Some v -> Printf.sprintf " stroke=\"%s\"" v in
+  let stroke_width = match stroke_width with None -> "" | Some v -> Printf.sprintf " stroke-width=\"%g\"" v in
+  let stroke_opacity = match stroke_opacity with None -> "" | Some v -> Printf.sprintf " stroke-opacity=\"%g\"" v in
+  let css          = match css          with None -> "" | Some v -> Printf.sprintf " class=\"%s\"" v in
+
+  Printf.kprintf (Buffer.add_string b) {|
+<rect x="%d" y="%d" width="%d" height="%d"%s%s%s%s%s%s%s%s />|}
+  x y width height rx ry css fill fill_opacity stroke stroke_width stroke_opacity;
 ;;
 
 let begin_group b ~translate:(tx, ty) ~scale:(sx, sy) =
@@ -306,6 +345,37 @@ let () =
 
   let svg = new_svg_document ~width:297 ~height:210 () in
 
+  (* CSS styles *)
+  let css = new_css () in
+  css_add css ~selector:".month_name" ~style:[
+    text_anchor, "middle";
+    font_family, "sans-serif";
+    font_size, "14.8";
+    font_weight, "bold";
+    fill, "#444";
+    fill_opacity, "0.8";
+  ];
+  css_add css ~selector:".day_name" ~style:[
+    text_anchor, "middle";
+    font_family, "sans-serif";
+    font_size, "9.0";
+    font_weight, "normal";
+    fill, "#000";
+  ];
+  css_add css ~selector:".day_num" ~style:[
+    text_anchor, "middle";
+    font_family, "sans-serif";
+    font_size, "14.2";
+    font_weight, "normal";
+    fill, "#222";
+  ];
+  css_add css ~selector:".sep_line" ~style:[
+    stroke, "#FFF";
+    stroke_width, "0.9";
+    stroke_opacity, "0.5";
+  ];
+  add_css_to_svg css svg;
+
   (* Background *)
   let bg_color = "#FFF" in
   let fill = bg_color in
@@ -338,20 +408,20 @@ let () =
 
     (* Month label *)
     let text = String.capitalize_ascii months.(pred mon) in
-    add_text svg ~x:110 ~y:26 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.8 ~font_weight:"bold" ~fill:"#444" ~fill_opacity:0.8 ~text ();
+    add_text svg ~x:110 ~y:26 ~css:"month_name" ~text ();
     add_newline svg;
 
     (* Labels: days names *)
     for i = 0 to 6 do
       let x = 19 + i * days_h_spacing in
       let text = days_abbr.(days_order.(i)) in
-      add_text svg ~x ~y:44 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:9.0 ~font_weight:"normal" ~fill:"#000" ~text ();
+      add_text svg ~x ~y:44 ~css:"day_name" ~text ();
     done;
     add_newline svg;
 
     let y = 50 in
-    add_line svg ~x1:6 ~y1:y ~x2:(days_h_spacing * 7 + 2) ~y2:y
-      ~style:"stroke:rgb(255,255,255); stroke-width:0.9; stroke-opacity:0.5" ();
+    add_line svg ~x1:6 ~y1:y ~x2:(days_h_spacing * 7 + 2) ~y2:y ~css:"sep_line" ();
+    add_newline svg;
 
     let t = Unix.gmtime 0.0 in
     let m = make_month t year (pred mon) in
@@ -373,7 +443,7 @@ let () =
           if w = 0 then ()
         end else begin
           let text = Printf.sprintf "%d" d in
-          add_text svg ~x:(x+15) ~y:(y+18) ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.2 ~font_weight:"normal" ~fill:"#222" ~text ();
+          add_text svg ~x:(x+15) ~y:(y+18) ~css:"day_num" ~text ();
         end;
       done;
       add_newline svg;
