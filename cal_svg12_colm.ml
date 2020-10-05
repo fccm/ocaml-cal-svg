@@ -30,7 +30,7 @@ let lang =
 (* SVG *)
 
 let new_svg_document ~width ~height () =
-  let b = Buffer.create 10 in
+  let b = Buffer.create 100 in
   Printf.kprintf (Buffer.add_string b)
     {|<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
