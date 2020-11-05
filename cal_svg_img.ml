@@ -274,6 +274,9 @@ let current_year_and_month () =
 
 
 let imgs = [|
+  (* CC0 Images from AltPhotos.com: *)
+  (* https://altphotos.com/free/dog/ *)
+  (* See the file "dogs-calendar-credits.txt" for more details. *)
   "_imgs_cc0/dogs/animal-dog-border-collie.jpg";
   "_imgs_cc0/dogs/black-dog-portrait.jpg";
   "_imgs_cc0/dogs/car-dog.jpg";
