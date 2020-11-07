@@ -338,7 +338,7 @@ let () =
       let d = m.(w).(i) in
       if d = 0 then begin
         if w = 0 then
-          add_rect svg ~x ~y ~width:40 ~height:cell_height ~fill:"#EEE" ~stroke:"#000" ~stroke_width:0.3
+          add_rect svg ~x ~y ~width:40 ~height:cell_height ~fill:"#E8E8EB" ~stroke:"#000" ~stroke_width:0.3
       end else begin
         add_rect svg ~x ~y ~width:40 ~height:cell_height ~fill:"#FFF" ~stroke:"#000" ~stroke_width:0.3;
         let text = Printf.sprintf "%d" d in
