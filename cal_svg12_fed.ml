@@ -368,8 +368,14 @@ let cal = List.assoc lang cal_lang
 let monday_first = 6, [| 0; 1; 2; 3; 4; 5; 6 |]
 let sunday_first = 0, [| 6; 0; 1; 2; 3; 4; 5 |]
 
-let off, days_order = sunday_first
-let off, days_order = monday_first
+let off, days_order =
+  try
+    match Sys.argv.(3) with
+    | "--monday-first" -> monday_first
+    | "--sunday-first" -> sunday_first
+    | _ -> raise Exit
+  with _ ->
+    monday_first
 
 
 let t_same t1 t2 =
