@@ -1,8 +1,9 @@
 YEAR = 2021
 _LANG = en
+TITLE = dogs
 B64DIR = $(shell ocamlfind query base64)
 
-all: cal-$(YEAR)-all-dogs-$(_LANG).pdf
+all: cal-$(YEAR)-all-$(TITLE)-$(_LANG).pdf
 
 svg:
 	ocaml -I $(B64DIR) base64.cma cal_svg_img.ml $(YEAR)-01 $(_LANG) > /tmp/cal-$(YEAR)-01-$(_LANG).svg
@@ -60,7 +61,7 @@ jpg: png
 	$(MAKE) /tmp/cal-$(YEAR)-11-$(_LANG).jpg
 	$(MAKE) /tmp/cal-$(YEAR)-12-$(_LANG).jpg
 
-cal-$(YEAR)-all-dogs-$(_LANG).pdf: _pdf
+cal-$(YEAR)-all-$(TITLE)-$(_LANG).pdf: _pdf
 	gs -q -sPAPERSIZE=a4 -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=$@ /tmp/cal-$(YEAR)-*.pdf
 	@echo "Done: $@"
 
