@@ -41,3 +41,6 @@ cal-$(YEAR).pdf: pdf
 
 %.png: %.svg
 	inkscape $< --export-background=white --export-png=$@
+
+%.jpg: %.png
+	convert $< -resize 360 $@
