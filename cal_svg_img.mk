@@ -1,9 +1,11 @@
 YEAR = 2021
 _LANG = en
-TITLE = dogs
+#TITLE = dogs
+#TITLE = city-night
+TITLE = mount-fuji
 B64DIR = $(shell ocamlfind query base64)
 
-all: cal-$(YEAR)-all-$(TITLE)-$(_LANG).pdf
+all: cal-$(YEAR)-$(TITLE)-$(_LANG).pdf
 
 svg:
 	ocaml -I $(B64DIR) base64.cma cal_svg_img.ml $(YEAR)-01 $(_LANG) > /tmp/cal-$(YEAR)-01-$(_LANG).svg
@@ -61,7 +63,7 @@ jpg: png
 	$(MAKE) /tmp/cal-$(YEAR)-11-$(_LANG).jpg
 	$(MAKE) /tmp/cal-$(YEAR)-12-$(_LANG).jpg
 
-cal-$(YEAR)-all-$(TITLE)-$(_LANG).pdf: _pdf
+cal-$(YEAR)-$(TITLE)-$(_LANG).pdf: _pdf
 	gs -q -sPAPERSIZE=a4 -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=$@ /tmp/cal-$(YEAR)-*.pdf
 	@echo "Done: $@"
 
@@ -88,8 +90,10 @@ _pdf: svg
 
 %.png: %.svg
 	inkscape $< --export-background=white --export-png=$@
-#	mogrify -resize 360 $@
+	mogrify -resize 360 $@
 
 %.jpg: %.png
 	convert $< -resize 360 $@
 
+clean:
+	$(RM) /tmp/cal-$(YEAR)-*-$(_LANG).svg /tmp/cal-$(YEAR)-*-$(_LANG).pdf

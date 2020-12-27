@@ -97,6 +97,7 @@ let add_image b fn () =
   x="0"
   width="210"
   height="140"
+  preserveAspectRatio="none"
   xlink:href="data:image/jpeg;base64,%s" />
 |} s64 ;;
 
@@ -273,7 +274,7 @@ let current_year_and_month () =
    t.Unix.tm_mon + 1)
 
 
-let imgs = [|
+let _imgs = [|
   (* CC0 Images from AltPhotos.com: *)
   (* https://altphotos.com/free/dog/ *)
   (* See the file "dogs-calendar-credits.txt" for more details. *)
@@ -289,6 +290,46 @@ let imgs = [|
   "_imgs_cc0/dogs/shepherd.jpg";
   "_imgs_cc0/dogs/winter-husky-dog.jpg";
   "_imgs_cc0/dogs/wolf-closeup-winter.jpg";
+|]
+
+let _imgs = [|
+  (* CC0 Images from AltPhotos.com: *)
+  (* https://altphotos.com/ *)
+  (* See the file "night-city-calendar-credits.txt" for more details. *)
+  "_imgs_cc0/alt/sort-todo/city-night/bay-night-singapore.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/city-night-bridge.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/city-night.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/dubai-aerial-night-burj-khalifa.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/long-exposure-city-traffic.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/night-lights-trail.3.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/san-francisco-night.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/singapore-night-bay.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/singapore-night.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/times-square-night.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/singapore-night-temple-asia.jpg";
+  "_imgs_cc0/alt/sort-todo/city-night/traffic-city-night.jpg";
+|]
+
+let imgs = [|
+  (* https://en.wikipedia.org/wiki/Thirty-six_Views_of_Mount_Fuji
+   *
+   * Thirty-six Views of Mount Fuji is a series of landscape printscreated by
+   * the Japanese ukiyo-e artist Hokusai (1760–1849).
+   * The series depicts Mount Fuji from different locations and in various seasons
+   * and weather conditions.
+   *)
+  "_imgs_cc0/japan/800px-Fuji_seen_through_the_Mannen_bridge_at_Fukagawa.jpg";
+  "_imgs_cc0/japan/800px-Katsushika_Hokusai,_Goten-yama_hill,_Shinagawa_on_the_Tōkaidō,_ca._1832.jpg";
+  "_imgs_cc0/japan/800px-Sazai_hall_-_500_Rakan_temples.jpg";
+  "_imgs_cc0/japan/800px-Senju_in_the_Musachi_provimce.jpg";
+  "_imgs_cc0/japan/800px-Shimomeguro.jpg";
+  "_imgs_cc0/japan/800px-Sunset_across_the_Ryogoku_bridge_from_the_bank_of_the_Sumida_river_at_Onmagayashi.jpg";
+  "_imgs_cc0/japan/800px-Surugadai_in_Edo_Mount_Fuji.jpg";
+  "_imgs_cc0/japan/800px-The_coast_of_seven_leages_in_Kamakura.jpg";
+  "_imgs_cc0/japan/800px-The_Tea_plantation_of_Katakura_in_the_Suruga_province.jpg";
+  "_imgs_cc0/japan/800px-Tsukada_Island_in_the_Musashi_province.jpg";
+  "_imgs_cc0/japan/800px-Ushibori_in_the_Hitachi_province.jpg";
+  "_imgs_cc0/japan/Lower_Meguro_Shimo_Meguro_Mount_Fuji.jpg";
 |]
 
 
