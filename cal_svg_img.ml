@@ -310,6 +310,24 @@ let _imgs = [|
   "_imgs_cc0/alt/city-night/traffic-city-night.jpg";
 |]
 
+let _imgs = [|
+  (* CC0 Images from AltPhotos.com: *)
+  (* https://altphotos.com/ *)
+  (* See the file "women-calendar-credits.txt" for more details. *)
+  "_imgs_cc0/alt/women/blonde-sitting-meadow.jpg";
+  "_imgs_cc0/alt/women/woman-portrait-forest-young.jpg";
+  "_imgs_cc0/alt/women/pensive-woman-in-meadow.jpg";
+  "_imgs_cc0/alt/women/style-woman-meadow.jpg";
+  "_imgs_cc0/alt/women/woman-blow-meadow-attractive.jpg";
+  "_imgs_cc0/alt/women/wet-woman-nude-lake.jpg";
+  "_imgs_cc0/alt/women/woman-water-face.jpg";
+  "_imgs_cc0/alt/women/young-woman-sunglasses-portrait.jpg";
+  "_imgs_cc0/alt/women/young-woman-sit-grass.jpg";
+  "_imgs_cc0/alt/women/window-woman-underwear.jpg";
+  "_imgs_cc0/alt/women/woman-smile-portrait-closeup.jpg";
+  "_imgs_cc0/alt/women/girl-hold-snow-blow-women.jpg";
+|]
+
 let imgs = [|
   (* https://en.wikipedia.org/wiki/Thirty-six_Views_of_Mount_Fuji
    *
