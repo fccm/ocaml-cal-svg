@@ -171,7 +171,9 @@ let add_camel b () =
   Printf.kprintf (Buffer.add_string b) {|
 
 <!--
-
+Credits for the Camel background of ocaml.org:
+TODO: Find who made this picture
+     (I haven't been able to find it)
 -->
 
   <image
