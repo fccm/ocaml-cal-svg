@@ -296,18 +296,18 @@ let _imgs = [|
   (* CC0 Images from AltPhotos.com: *)
   (* https://altphotos.com/ *)
   (* See the file "night-city-calendar-credits.txt" for more details. *)
-  "_imgs_cc0/alt/sort-todo/city-night/bay-night-singapore.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/city-night-bridge.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/city-night.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/dubai-aerial-night-burj-khalifa.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/long-exposure-city-traffic.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/night-lights-trail.3.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/san-francisco-night.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/singapore-night-bay.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/singapore-night.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/times-square-night.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/singapore-night-temple-asia.jpg";
-  "_imgs_cc0/alt/sort-todo/city-night/traffic-city-night.jpg";
+  "_imgs_cc0/alt/city-night/bay-night-singapore.jpg";
+  "_imgs_cc0/alt/city-night/city-night-bridge.jpg";
+  "_imgs_cc0/alt/city-night/city-night.jpg";
+  "_imgs_cc0/alt/city-night/dubai-aerial-night-burj-khalifa.jpg";
+  "_imgs_cc0/alt/city-night/long-exposure-city-traffic.jpg";
+  "_imgs_cc0/alt/city-night/night-lights-trail.3.jpg";
+  "_imgs_cc0/alt/city-night/san-francisco-night.jpg";
+  "_imgs_cc0/alt/city-night/singapore-night-bay.jpg";
+  "_imgs_cc0/alt/city-night/singapore-night.jpg";
+  "_imgs_cc0/alt/city-night/times-square-night.jpg";
+  "_imgs_cc0/alt/city-night/singapore-night-temple-asia.jpg";
+  "_imgs_cc0/alt/city-night/traffic-city-night.jpg";
 |]
 
 let imgs = [|
