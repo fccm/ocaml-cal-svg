@@ -313,7 +313,8 @@ let () =
 
   (* Year and title *)
   let text = Printf.sprintf "%s %d" (String.capitalize_ascii cal) year in
-  add_text svg ~x:14 ~y:16 ~text_anchor:"left" ~font_family:"sans-serif" ~font_size:8.8 ~font_weight:"bold" ~fill:"#000" ~text ();
+  add_text svg ~x:14 ~y:16 ~text_anchor:"left" ~font_family:"sans-serif" ~font_size:8.8
+                           ~font_weight:"bold" ~fill:"#000" ~text ();
   add_newline svg;
 
   for mon = 1 to 12 do  (* for each month *)
@@ -332,18 +333,21 @@ let () =
 
     (* Month block background *)
     let height = 24 + 14 + 6 * cell_height + 12 in
-    add_rect svg ~x:0 ~y:6 ~width:225 ~height ~rx:14.0 ~ry:14.0 ~fill_opacity:0.5 ~fill:"#FFF" ~stroke:"#000" ~stroke_width:0.8 ();
+    add_rect svg ~x:0 ~y:6 ~width:225 ~height ~rx:14.0 ~ry:14.0 ~fill_opacity:0.5
+                           ~fill:"#FFF" ~stroke:"#000" ~stroke_width:0.8 ();
 
     (* Month label *)
     let text = String.capitalize_ascii months.(pred mon) in
-    add_text svg ~x:110 ~y:26 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.8 ~font_weight:"bold" ~fill:"#000" ~fill_opacity:0.8 ~text ();
+    add_text svg ~x:110 ~y:26 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.8
+                              ~font_weight:"bold" ~fill:"#000" ~fill_opacity:0.8 ~text ();
     add_newline svg;
 
     (* Labels: days names *)
     for i = 0 to 6 do
       let x = 19 + i * days_h_spacing in
       let text = days_abbr.(days_order.(i)) in
-      add_text svg ~x ~y:44 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:9.0 ~font_weight:"normal" ~fill:"#000" ~text ();
+      add_text svg ~x ~y:44 ~text_anchor:"middle" ~font_family:"sans-serif"
+                            ~font_size:9.0 ~font_weight:"normal" ~fill:"#000" ~text ();
     done;
     add_newline svg;
 
@@ -371,7 +375,8 @@ let () =
           if w = 0 then ()
         end else begin
           let text = Printf.sprintf "%d" d in
-          add_text svg ~x:(x+15) ~y:(y+18) ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.2 ~font_weight:"normal" ~fill:"#222" ~text ();
+          add_text svg ~x:(x+15) ~y:(y+18) ~text_anchor:"middle" ~font_family:"sans-serif"
+                                           ~font_size:14.2 ~font_weight:"normal" ~fill:"#222" ~text ();
         end;
       done;
       add_newline svg;
