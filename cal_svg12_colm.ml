@@ -337,6 +337,10 @@ let current_year () =
   (t.Unix.tm_year  + 1900)
 
 
+(* don't use CSS because web-browsers don't read CSS into SVG yet *)
+let use_css = false
+
+
 let () =
   let year =
     try int_of_string Sys.argv.(1)
@@ -345,36 +349,39 @@ let () =
 
   let svg = new_svg_document ~width:297 ~height:210 () in
 
-  (* CSS styles *)
-  let css = new_css () in
-  css_add css ~selector:".month_name" ~style:[
-    text_anchor, "middle";
-    font_family, "sans-serif";
-    font_size, "14.8";
-    font_weight, "bold";
-    fill, "#444";
-    fill_opacity, "0.8";
-  ];
-  css_add css ~selector:".day_name" ~style:[
-    text_anchor, "middle";
-    font_family, "sans-serif";
-    font_size, "9.0";
-    font_weight, "normal";
-    fill, "#000";
-  ];
-  css_add css ~selector:".day_num" ~style:[
-    text_anchor, "middle";
-    font_family, "sans-serif";
-    font_size, "14.2";
-    font_weight, "normal";
-    fill, "#222";
-  ];
-  css_add css ~selector:".sep_line" ~style:[
-    stroke, "#FFF";
-    stroke_width, "0.9";
-    stroke_opacity, "0.5";
-  ];
-  add_css_to_svg css svg;
+  if use_css
+  then begin
+    (* CSS styles *)
+    let css = new_css () in
+    css_add css ~selector:".month_name" ~style:[
+      text_anchor, "middle";
+      font_family, "sans-serif";
+      font_size, "14.8";
+      font_weight, "bold";
+      fill, "#444";
+      fill_opacity, "0.8";
+    ];
+    css_add css ~selector:".day_name" ~style:[
+      text_anchor, "middle";
+      font_family, "sans-serif";
+      font_size, "9.0";
+      font_weight, "normal";
+      fill, "#000";
+    ];
+    css_add css ~selector:".day_num" ~style:[
+      text_anchor, "middle";
+      font_family, "sans-serif";
+      font_size, "14.2";
+      font_weight, "normal";
+      fill, "#222";
+    ];
+    css_add css ~selector:".sep_line" ~style:[
+      stroke, "#FFF";
+      stroke_width, "0.9";
+      stroke_opacity, "0.5";
+    ];
+    add_css_to_svg css svg;
+  end;
 
   (* Background *)
   let bg_color = "#FFF" in
@@ -408,19 +415,28 @@ let () =
 
     (* Month label *)
     let text = String.capitalize_ascii months.(pred mon) in
-    add_text svg ~x:110 ~y:26 ~css:"month_name" ~text ();
+    if use_css
+    then add_text svg ~x:110 ~y:26 ~css:"month_name" ~text ()
+    else add_text svg ~x:110 ~y:26 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.8
+                                   ~font_weight:"bold" ~fill:"#444" ~fill_opacity:0.8 ~text ();
     add_newline svg;
 
     (* Labels: days names *)
     for i = 0 to 6 do
       let x = 19 + i * days_h_spacing in
       let text = days_abbr.(days_order.(i)) in
-      add_text svg ~x ~y:44 ~css:"day_name" ~text ();
+      if use_css
+      then add_text svg ~x ~y:44 ~css:"day_name" ~text ()
+      else add_text svg ~x ~y:44 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:9.0
+                                 ~font_weight:"normal" ~fill:"#000" ~text ();
     done;
     add_newline svg;
 
     let y = 50 in
-    add_line svg ~x1:6 ~y1:y ~x2:(days_h_spacing * 7 + 2) ~y2:y ~css:"sep_line" ();
+    if use_css
+    then add_line svg ~x1:6 ~y1:y ~x2:(days_h_spacing * 7 + 2) ~y2:y ~css:"sep_line" ()
+    else add_line svg ~x1:6 ~y1:y ~x2:(days_h_spacing * 7 + 2) ~y2:y
+                      ~style:"stroke:rgb(255,255,255); stroke-width:0.9; stroke-opacity:0.5" ();
     add_newline svg;
 
     let t = Unix.gmtime 0.0 in
@@ -443,7 +459,10 @@ let () =
           if w = 0 then ()
         end else begin
           let text = Printf.sprintf "%d" d in
-          add_text svg ~x:(x+15) ~y:(y+18) ~css:"day_num" ~text ();
+          if use_css
+          then add_text svg ~x:(x+15) ~y:(y+18) ~css:"day_num" ~text ()
+          else add_text svg ~x:(x+15) ~y:(y+18) ~text_anchor:"middle" ~font_family:"sans-serif"
+                                                ~font_size:14.2 ~font_weight:"normal" ~fill:"#222" ~text ();
         end;
       done;
       add_newline svg;
