@@ -1,4 +1,4 @@
-YEAR = 2020
+YEAR = 2022
 
 all: cal-$(YEAR).pdf
 
@@ -41,3 +41,6 @@ cal-$(YEAR).pdf: pdf
 
 %.png: %.svg
 	inkscape $< --export-background=white --export-png=$@
+
+%.jpg: %.png
+	convert $< -resize 360 $@
