@@ -20,6 +20,7 @@ let lang = "id"  (* language: Indonesian *)
 let lang = "pt"  (* language: Portuguese *)
 let lang = "no"  (* language: Norwegian *)
 let lang = "sl"  (* language: Slovenian *)
+let lang = "uk"  (* language: Ukrainian *)
 let lang = "ru"  (* language: Russian *)
 let lang = "en"  (* language: English *)
 let lang = "fr"  (* language: French *)
@@ -140,6 +141,7 @@ let cal_lang = [
   "pt", "calendário";
   "no", "kalender";
   "sl", "koledar";
+  "uk", "календар";
   "ru", "календарь";
 ]
 
@@ -199,6 +201,11 @@ let months_lang = [
     "maj"; "junij"; "julij"; "avgust";
     "september"; "oktober"; "november"; "december";
   |];
+  "uk", [|
+    "січня"; "лютого"; "березня"; "квітня";
+    "травня"; "червня"; "липня"; "серпня";
+    "вересня"; "жовтня"; "листопада"; "грудня";
+  |];
   "ru", [|
     "январь"; "февраль"; "март"; "апрель";
     "май"; "июнь"; "июль"; "август";
@@ -230,6 +237,8 @@ let days_lang = [
     "fredag"; "lørdag"; "søndag" |];
   "sl", [| "ponedeljek"; "torek"; "sreda";
     "četrtek"; "petek"; "sobota"; "nedelja" |];
+  "uk", [| "понеділок"; "вівторок"; "середа";
+    "четвер"; "пʼятниця"; "субота"; "неділя" |];
   "ru", [| "понедельник"; "вторник"; "среда";
     "четверг"; "пятница"; "суббота"; "воскресенье" |];
 ]
@@ -257,6 +266,8 @@ let days_abbr_lang = [
     "tor"; "fre"; "lør"; "søn" |];
   "sl", [| "pon"; "tor"; "sre";
     "čet"; "pet"; "sob"; "ned" |];
+  "uk", [| "пн"; "вт"; "ср";
+    "чт"; "пт"; "сб"; "нд" |];
   "ru", [| "пн"; "вт"; "ср";
     "чт"; "пт"; "сб"; "вс" |];
 ]
@@ -270,8 +281,14 @@ let cal = List.assoc lang cal_lang
 let monday_first = 6, [| 0; 1; 2; 3; 4; 5; 6 |]
 let sunday_first = 0, [| 6; 0; 1; 2; 3; 4; 5 |]
 
-let off, days_order = sunday_first
-let off, days_order = monday_first
+let off, days_order =
+  try
+    match Sys.argv.(3) with
+    | "--monday-first" -> monday_first
+    | "--sunday-first" -> sunday_first
+    | _ -> raise Exit
+  with _ ->
+    monday_first
 
 
 let t_same t1 t2 =
@@ -378,8 +395,7 @@ let () =
     add_newline svg;
 
     let y = 50 in
-    add_line svg ~x1:6 ~y1:y ~x2:(days_h_spacing * 7 + 2) ~y2:y
-      ~style:"stroke:#222; stroke-width:0.9; stroke-opacity:0.5" ();
+    add_line svg ~x1:6 ~y1:y ~x2:(days_h_spacing * 7 + 2) ~y2:y ~style:"stroke:#222; stroke-width:0.9; stroke-opacity:0.5" ();
 
     let t = Unix.gmtime 0.0 in
     let m = make_month t year (pred mon) in

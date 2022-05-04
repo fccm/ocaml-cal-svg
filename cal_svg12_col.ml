@@ -20,6 +20,7 @@ let lang = "id"  (* language: Indonesian *)
 let lang = "pt"  (* language: Portuguese *)
 let lang = "no"  (* language: Norwegian *)
 let lang = "sl"  (* language: Slovenian *)
+let lang = "uk"  (* language: Ukrainian *)
 let lang = "ru"  (* language: Russian *)
 let lang = "en"  (* language: English *)
 let lang = "fr"  (* language: French *)
@@ -92,6 +93,7 @@ let cal_lang = [
   "pt", "calendário";
   "no", "kalender";
   "sl", "koledar";
+  "uk", "календар";
   "ru", "календарь";
 ]
 
@@ -151,6 +153,11 @@ let months_lang = [
     "maj"; "junij"; "julij"; "avgust";
     "september"; "oktober"; "november"; "december";
   |];
+  "uk", [|
+    "січня"; "лютого"; "березня"; "квітня";
+    "травня"; "червня"; "липня"; "серпня";
+    "вересня"; "жовтня"; "листопада"; "грудня";
+  |];
   "ru", [|
     "январь"; "февраль"; "март"; "апрель";
     "май"; "июнь"; "июль"; "август";
@@ -182,6 +189,8 @@ let days_lang = [
     "fredag"; "lørdag"; "søndag" |];
   "sl", [| "ponedeljek"; "torek"; "sreda";
     "četrtek"; "petek"; "sobota"; "nedelja" |];
+  "uk", [| "понеділок"; "вівторок"; "середа";
+    "четвер"; "пʼятниця"; "субота"; "неділя" |];
   "ru", [| "понедельник"; "вторник"; "среда";
     "четверг"; "пятница"; "суббота"; "воскресенье" |];
 ]
@@ -209,6 +218,8 @@ let days_abbr_lang = [
     "tor"; "fre"; "lør"; "søn" |];
   "sl", [| "pon"; "tor"; "sre";
     "čet"; "pet"; "sob"; "ned" |];
+  "uk", [| "пн"; "вт"; "ср";
+    "чт"; "пт"; "сб"; "нд" |];
   "ru", [| "пн"; "вт"; "ср";
     "чт"; "пт"; "сб"; "вс" |];
 ]
@@ -222,8 +233,14 @@ let cal = List.assoc lang cal_lang
 let monday_first = 6, [| 0; 1; 2; 3; 4; 5; 6 |]
 let sunday_first = 0, [| 6; 0; 1; 2; 3; 4; 5 |]
 
-let off, days_order = sunday_first
-let off, days_order = monday_first
+let off, days_order =
+  try
+    match Sys.argv.(3) with
+    | "--monday-first" -> monday_first
+    | "--sunday-first" -> sunday_first
+    | _ -> raise Exit
+  with _ ->
+    monday_first
 
 
 let t_same t1 t2 =
@@ -286,7 +303,7 @@ let () =
   let svg = new_svg_document ~width:297 ~height:210 () in
 
   (* Background *)
-  add_rect svg ~x:0 ~y:0 ~width:297 ~height:210 ~fill:"#CCC" ~stroke:"#CCC" ~stroke_width:0.0 ();
+  add_rect svg ~x:0 ~y:0 ~width:297 ~height:210 ~fill:"#FFF" ~stroke:"#FFF" ~stroke_width:0.0 ();
 
   (* Year and title *)
   let text = Printf.sprintf "%s %d" (String.capitalize_ascii cal) year in
@@ -312,7 +329,7 @@ let () =
     (* Labels: days names *)
     for i = 0 to 6 do
       let x = 4 + i * 30 in
-      add_rect svg ~x ~y:30 ~width:30 ~height:14 ~fill:"#CCF" ~stroke:"#000" ~stroke_width:0.0 ~fill_opacity:0.3 ();
+      add_rect svg ~x ~y:30 ~width:30 ~height:14 ~fill:"#CCF" ~stroke:"#000" ~stroke_width:0.0 ~fill_opacity:0.8 ();
       let x = 19 + i * 30 in
       let text = days_abbr.(days_order.(i)) in
       add_text svg ~x ~y:40 ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:8.0 ~font_weight:"normal" ~fill:"#000" ~text;
@@ -337,9 +354,9 @@ let () =
         let y = 44 + w * cell_height in
         let d = m.(w).(i) in
         if d = 0 then begin
-          if w = 0 then add_rect svg ~x ~y ~width:30 ~height:cell_height ~fill:"#FFF" ~stroke:"#FFF" ~stroke_width:0.0 ~fill_opacity:0.2 ()
+          if w = 0 then add_rect svg ~x ~y ~width:30 ~height:cell_height ~fill:"#EBEBEB" ~stroke:"#FFF" ~stroke_width:0.0 ~fill_opacity:1.0 ()
         end else begin
-          add_rect svg ~x ~y ~width:30 ~height:cell_height ~fill:"#FFF" ~stroke:"#FFF" ~stroke_width:0.0 ~fill_opacity:0.3 ();
+          add_rect svg ~x ~y ~width:30 ~height:cell_height ~fill:"#F4F4F4" ~stroke:"#FFF" ~stroke_width:0.0 ~fill_opacity:1.0 ();
           let text = Printf.sprintf "%d" d in
           add_text svg ~x:(x+15) ~y:(y+18) ~text_anchor:"middle" ~font_family:"sans-serif" ~font_size:14.0 ~font_weight:"normal" ~fill:"#222" ~text;
         end;
